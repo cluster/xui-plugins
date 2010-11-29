@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script language="javascript" type="text/javascript" src="xui.js"></script>
+<script language="javascript" type="text/javascript" src="ws.js"></script>
+<script language="javascript" type="text/javascript">
+x$(window).load(function(){
+	var ws= x$("#output").ws("ws://echo.websocket.org", function(res, el){
+		el.html("bottom", res);
+	});
+	
+	x$("#output").on("output_openWS", function(res){
+		x$("#info").html("You're connected to ws://echo.websocket.org, this websocket server repeats what you write in the textfield");
+	});
+	
+	x$("#buttonsend").on("click", function(){
+		ws.send(x$("input")[0].value);
+	});
+});
+</script>
+<h2>WebSocket Test</h2>
+<div id="info">You're not connected</div>
+<div id="output"></div>
+<br/>
+<input type="text"/>
+<button id="buttonsend" href="#">Send</button>
+</html>
